@@ -57,7 +57,7 @@ def create_database_user(db_user, db_pass):
     split_output = [x.strip() for x in output.split('\n')]
     for out in split_output:
         if out == db_user:
-            print "User already exists, continuing"
+            print("User already exists, continuing")
             return
     sudo('psql -c "CREATE USER %s WITH NOCREATEDB NOCREATEUSER ENCRYPTED PASSWORD E\'%s\'"' % (db_user, db_pass), user='postgres')
 
@@ -66,7 +66,7 @@ def create_database(db_name, owner_name):
     split_output = [x.strip() for x in output.split('\n')]
     for out in split_output:
         if out == db_name:
-            print "Database already exists, continuing"
+            print("Database already exists, continuing")
             return
     sudo('psql -c "CREATE DATABASE %s WITH OWNER %s"' % (
         db_name, owner_name), user='postgres')
@@ -80,14 +80,14 @@ def add_key():
 def xrun(command, hidden='', *args, **kwargs):
     old_state = output.running
     output.running = False
-    print '[%s] run: %s' % (env.host_string, command)
+    print('[%s] run: %s' % (env.host_string, command))
     run(command + hidden, *args, **kwargs)
     output.running = old_state
 
 def xsudo(command, hidden='', *args, **kwargs):
     old_state = output.running
     output.running = False
-    print '[%s] sudo: %s' % (env.host_string, command)
+    print('[%s] sudo: %s' % (env.host_string, command))
     sudo(command + hidden, *args, **kwargs)
     output.running = old_state
     
